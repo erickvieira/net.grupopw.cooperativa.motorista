@@ -1,0 +1,101 @@
+<ion-header hideWhen="android,web">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cadastro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background" *ngIf="carIncluded; else includeCarTemp">
+  <ion-list no-boder class="box blur centered border-box-light">
+    <form [formGroup]="registerForm" class="light-input-list">
+      <ion-list-header>
+        <ion-icon name="lock" item-right></ion-icon>
+        <ion-label>Dados de Login</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label floating>E-mail</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Digite a senha novamente</ion-label>
+        <ion-input formControlName="confirm" type="password"></ion-input>
+      </ion-item>
+      <ion-item style="display: none !important"></ion-item>
+    </form>
+  </ion-list>
+</ion-content>
+
+<ng-template #includeCarTemp>
+  <ion-content class="background">
+    <ion-list no-boder class="box blur centered border-box-light">
+      <form [formGroup]="includeCarForm" class="light-input-list">
+        <ion-list-header>
+          <ion-icon name="car" item-right></ion-icon>
+          <ion-label>Dados do carro</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Placa</ion-label>
+          <ion-input formControlName="id" type="text" 
+            [brmasker]="{mask:'AAA-0000', len:8}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Marca e Modelo</ion-label>
+          <ion-input formControlName="model" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!anotherColorSelected; else anotherColorTemp">
+          <ion-label floating>Cor predominante</ion-label>
+          <ion-select interface="popover" formControlName="color" #colorFC
+            (ionChange)="checkIfIsAnotherColor(colorFC.value)">
+            <ion-option *ngFor="let color of colors"
+              [value]="color">
+              {{ color }}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ng-template #anotherColorTemp>
+          <ion-item>
+            <ion-label floating>Cor do carro</ion-label>
+            <ion-input formControlName="color" type="text"></ion-input>
+          </ion-item>
+        </ng-template>
+        <ion-item>
+          <ion-label floating>Espaço interno</ion-label>
+          <ion-select interface="popover" formControlName="carrier_size">
+            <ion-option *ngFor="let item of carrierSizes" 
+              [value]="item.value">
+              {{ item.key }}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item style="display: none !important"></ion-item>
+      </form>
+    </ion-list>
+  </ion-content>
+</ng-template>
+
+<ion-footer no-boder *ngIf="!updatingProfile; else updatingProfileTempFooter">
+  <button ion-button ion-button icon-end
+    type="button" (click)="!carIncluded ? carIncluded = true : register()"
+    style="margin-bottom: 5px;"
+    class="btn-margin btn-full-width">
+    {{ carIncluded ? 'CRIAR CONTA' : 'PRÓXIMO PASSO' }}
+    <ion-icon name="checkmark"></ion-icon>
+  </button>
+</ion-footer>
+<ng-template #updatingProfileTempFooter>
+  <ion-footer no-boder>
+    <button ion-button ion-button icon-end
+      type="button" (click)="includeVehicleDataWithValidation()"
+      style="margin-bottom: 5px;"
+      class="btn-margin btn-full-width">
+      CONCLUIR CADASTRO
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-footer>
+</ng-template>

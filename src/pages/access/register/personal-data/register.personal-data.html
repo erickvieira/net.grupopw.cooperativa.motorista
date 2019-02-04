@@ -1,0 +1,80 @@
+<ion-header hideWhen="android,web">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cadastro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="background" *ngIf="driverTicket.email && driverTicket.code; else checkTicket">
+  <ion-list no-boder class="box blur centered border-box-light">
+    <form [formGroup]="registerForm" class="light-input-list">
+      <ion-list-header class="more-top">
+        <ion-icon name="person" item-right></ion-icon>
+        <ion-label>Dados Pessoais</ion-label>\
+      </ion-list-header>
+      <ion-item>
+        <ion-label floating>Nome Completo</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>CPF</ion-label>
+        <ion-input formControlName="document" type="tel"
+          [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Nascimento</ion-label>
+        <ion-datetime doneText="OK" cancelText="VOLTAR"
+          displayFormat="DD/MM/YYYY" formControlName="birthday">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Sexo</ion-label>
+        <ion-select interface="popover" formControlName="gender">
+          <ion-option value="F">Feminino</ion-option>
+          <ion-option value="M">Masculino</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Celular</ion-label>
+        <ion-input formControlName="phone" type="tel"
+          [brmasker]="{mask:'(00) 00000-0000', len:15}"></ion-input>
+      </ion-item>
+      <ion-item style="display: none !important"></ion-item>
+    </form>
+  </ion-list>
+</ion-content>
+
+<ng-template #checkTicket>
+  <ion-content class="background">
+    <ion-list no-boder class="box blur centered border-box-light">
+      <form [formGroup]="driverTicketForm" class="light-input-list">
+        <ion-list-header class="more-top">
+          <ion-icon class="fa-id-card" item-right (click)="insertInvitation()"></ion-icon>
+          <ion-label>Dados do convite</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>E-mail do convidado</ion-label>
+          <ion-input formControlName="email" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Código do convite</ion-label>
+          <ion-input formControlName="code" type="text" 
+            (ionChange)="monitoring(driverTicketForm.valid)"></ion-input>
+        </ion-item>
+        <ion-item style="display: none !important"></ion-item>
+      </form>
+    </ion-list>
+  </ion-content>
+</ng-template>
+
+<ion-footer no-boder>
+  <button ion-button icon-end
+    type="button" (click)="invalidTicket ? checkCredentials() : nextStep()"
+    style="margin-bottom: 5px;"
+    class="btn-margin btn-full-width">
+    {{ invalidTicket ? 'VERIFICAR CONVITE' : 'PRÓXIMO PASSO' }}
+    <ion-icon [name]="invalidTicket ? 'barcode' : 'arrow-forward'"></ion-icon>
+  </button>
+</ion-footer>

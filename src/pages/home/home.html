@@ -1,0 +1,123 @@
+<ion-content>
+  <div class="nav">
+    <button class="nav-menu" color="white"
+      ion-button secondary icon-only
+      menuToggle round outline>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </div>
+
+  <ion-list no-boder style="margin-top: 50px !important">
+    <ion-list-header>
+      <ion-icon name="car" item-right></ion-icon>
+      <ion-label style="font-size: 18px; padding-top: 5px">VIAGENS DISPONÍVEIS</ion-label>
+    </ion-list-header>
+    <ion-item class="travel" *ngFor="let travel of travelsList async" (click)="travel['open'] = travel['open'] ? !travel['open'] : true">
+      <ion-card>
+        <ion-card-header>
+          <ion-badge class="travel-id" color="dark" style="padding-top: 4px !important">
+            <ion-icon name="albums"></ion-icon>
+            {{ travel.id }}
+          </ion-badge>
+          <ion-badge class="travel-stand-time" color="success" 
+            *ngIf="travel['stand_time'] < 2"
+            style="padding-top: 4px !important">
+            <ion-icon name="clock"></ion-icon>
+            há {{ travel['stand_time'] }} min
+          </ion-badge>
+          <ion-badge class="travel-stand-time" color="warning" 
+            *ngIf="travel['stand_time'] >= 2 && travel['stand_time'] < 10"
+            style="padding-top: 4px !important">
+            <ion-icon name="clock"></ion-icon>
+            há {{ travel['stand_time'] }} min
+          </ion-badge>
+          <ion-badge class="travel-stand-time" color="danger" 
+            *ngIf="travel['stand_time'] >= 10"
+            style="padding-top: 4px !important">
+            <ion-icon name="clock"></ion-icon>
+            há {{ travel['stand_time'] }} min
+          </ion-badge>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="origin">
+            <ion-icon class="fa-male" color="primary"></ion-icon>
+            <span>{{ 'Estrada 114, Conjunto de Chácaras São Joaquim, Goiânia - GO, 74470-220, Brasil' | slice:0:35 }}</span>
+            <span *ngIf="travel.destinAddress.length >= 35">...</span>
+          </div>
+          <div class="line"></div>
+          <div class="destin">
+            <ion-icon class="fa-flag-checkered" color="dark"></ion-icon>
+            <span>{{ (travel.destin ? travel.destinAddress : 'Destino desconhecido') | slice:0:35 }}</span>
+            <span *ngIf="travel.destinAddress.length >= 35">...</span>
+          </div>
+          <div class="value" *ngIf="travel.distance * travel.km_value && travel.distance * travel.km_value != 0">
+            <b>Preço sugerido:</b>
+            <span>{{ travel.distance * travel.km_value | currency:'R$':'symbol':'0.2-2':'br' }}</span>
+          </div>
+        </ion-card-content>
+        <ion-row *ngIf="travel['open']" [@easyInOutVer]>
+          <ion-col>
+            <button class="action-btn"
+              (click)="openOnMaps(travel)"
+              [disabled]="!travel.destin"
+              ion-button small block outline color="dark" icon-end>
+              VER TRAJETO
+              <ion-icon name="navigate">
+              </ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button class="action-btn"
+              (click)="openOnWaze(travel)"
+              ion-button small block outline icon-end>
+              ACEITAR
+              <ion-icon name="car">
+              </ion-icon>
+            </button>
+          </ion-col>
+          <div (click)="openOnMaps(travel)" class="travel-map" [style.background-image]="sanitizeTravelMapPreview(travel)">
+            <ion-icon name="pin" color="primary"></ion-icon>
+          </div>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <!-- <agm-map [latitude]="mapCenter.lat"
+    [longitude]="mapCenter.lng"
+    [scrollwheel]="false"
+    [zoom]="zoomLevel"
+    [streetViewControl]="false"
+    [zoomControlOptions]="{ position: 'TOP_LEFT' }"
+    [styles]="mapStyles">
+
+    <agm-marker
+      [iconUrl]="'../../assets/icon/pin-car.svg'"
+      [latitude]="userProv.instance.last_loc.lat"
+      [longitude]="userProv.instance.last_loc.lng"
+      [markerDraggable]="false"
+      #marker>
+    </agm-marker>
+    <agm-circle
+      #searchRadius
+      [radius]="1500"
+      [latitude]="userProv.instance.last_loc.lat"
+      [longitude]="userProv.instance.last_loc.lng"
+      [draggable]="false"
+      [clickable]="false"
+      [editable]="false"
+      [fillColor]="'#02c34c'"
+      [fillOpacity]="0.1">
+    </agm-circle>
+  </agm-map>
+
+  <div class="action-bar">
+    <button class="action-btn"
+      ion-button block primary icon-end>
+      CORRIDAS DISPONÍVEIS
+      <ion-icon name="car">
+        <ion-badge class="count-badge" color="danger">{{ travelsCount }}</ion-badge>
+      </ion-icon>
+    </button>
+  </div> -->
+</ion-content>

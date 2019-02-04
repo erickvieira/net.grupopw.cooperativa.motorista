@@ -1,0 +1,25 @@
+<ion-content class="background">
+  <ion-list no-boder class="box blur centered border-box-light">
+    <form [formGroup]="loginForm" class="light-input-list"
+      (ngSubmit)="login()">
+      <ion-item>
+        <ion-label floating>E-mail</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item style="display: none !important"></ion-item>
+      <button ion-button
+        type="submit" color="light"
+        class="btn-margin btn-full-width btn-box-footer">
+        ENTRAR
+      </button>
+    </form>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-boder>
+  <button ion-button block [navPush]="registerPage">SEJA UM MOTORISTA</button>
+</ion-footer>

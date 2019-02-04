@@ -1,0 +1,41 @@
+<div class="loading-splash" *ngIf="loading">
+  <div class="logo-holder">
+    <!-- <div class="logo"></div> -->
+    <svg width="100px" height="50px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
+      class="logo-text-anim lds-stroke">
+      <text x="50" y="50" text-anchor="middle" dy="0.38em" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#fff"
+        stroke-width="2" font-size="100" font-family="Roboto, cursive"> Zap
+        <animate attributeName="stroke-dasharray" calcMode="spline" values="0 300;300 300;0 300" keyTimes="0;0.5;1" dur="3" keySplines="0.3 0 0.7 1;0.3 0 0.7 1"
+          begin="0s" repeatCount="indefinite"></animate>
+        <animate attributeName="stroke-dashoffset" calcMode="linear" values="0;0;-200" keyTimes="0;0.5;1" dur="3" begin="0s" repeatCount="indefinite"></animate>
+      </text>
+    </svg>
+  </div>
+  <div class="loading-footer">
+    <ion-icon name="refresh" class="rotate-center"></ion-icon>
+    <small>{{ loadingText }}</small>
+  </div>
+</div>
+
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="primary" no-border>
+      <ion-title style="font-size: 26px">Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+      <button menuClose ion-item (click)="logout()">
+        Sair
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

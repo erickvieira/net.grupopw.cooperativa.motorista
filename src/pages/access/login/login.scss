@@ -1,0 +1,43 @@
+page-login {
+
+  .background {
+    background-image: $loginBackground !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  .box {
+    width: 95% !important;
+    max-width: 300px !important;
+  }
+
+  .border-box-light {
+    // border: 1px color($colors, white) solid;
+  }
+
+  .blur {
+    background: inherit !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    border-radius: 5px !important;
+  }
+
+  .blur::before {
+    content: "" !important;
+    background: $loginBackground !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: auto !important;
+    background-attachment: local !important;
+    position: absolute !important;
+    left: -10px !important;
+    right: -10px !important;
+    top: -10px !important;
+    bottom: -10px !important;
+    box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.2) !important;
+    filter: blur(8px) invert(12%) brightness(50%) !important;
+  }
+
+}

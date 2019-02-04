@@ -1,0 +1,257 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+$fa-font-path: "../assets/fonts" !default;
+@import "font-awesome";
+i[class^="fa-"], ion-icon[class^="fa-"] {
+  font-family: "FontAwesome" !important;
+}
+
+.loading-splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 9999;
+  background-image: linear-gradient(45deg, color($colors, secondary) 0%, color($colors, primary) 100%);
+
+  .logo-holder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .logo {
+      background-image: url("../assets/icon/brand-icon.png");
+      background-attachment: local;
+      background-position: center center;
+      background-origin: content-box;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: block;
+      z-index: 10000;
+      margin: 0 auto;
+      height: 30px;
+      width: 30px;
+    }
+
+    .logo-text-anim {
+      display: block;
+      height: 30px !important;
+    }
+  }
+
+  .loading-footer {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white !important;
+    font-family: Roboto, cursive;
+    font-weight: bolder !important;
+
+    ion-icon {
+      font-weight: bolder !important;
+      font-size: 12px !important;
+    }
+  }
+}
+
+ion-menu {
+  background: unset !important;
+
+  ion-header {
+    height: 50px !important;
+
+    ion-toolbar {
+      height: 50px !important;
+    }
+  }
+}
+
+.footer {
+  padding-left: 5px;
+  padding-right: 5px;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.btn-margin {
+  margin: 5px;
+}
+
+.btn-box-footer {
+  margin-top: 15px !important;
+  margin-bottom: -10px !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  color: white;
+  background: color($colors, a-secondary);
+}
+
+.btn-full-width {
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+.light-input-list {
+  ion-item {
+    ion-label,
+    ion-select,
+    ion-datetime {
+      color: white !important;
+    }
+  }
+
+  ion-item,
+  ion-select,
+  ion-list-header,
+  ion-item-divider,
+  ion-datetime {
+    width: 100% !important;
+    background: none !important;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+
+    ion-icon {
+      color: white !important;
+      font-size: 18px;
+    }
+    ion-input,
+    ion-datetime {
+      padding-right: 0 !important;
+      padding-left: 5px !important;
+      color: white !important;
+    }
+  }
+
+  ion-list-header,
+  ion-item-divider {
+    ion-label,
+    ion-icon {
+      color: color($colors, primary) !important;
+      font-size: 18px;
+    }
+  }
+
+  .more-top {
+    margin-top: 10px !important;
+  }
+
+  ion-list-header {
+    margin-bottom: -25px !important;
+    padding-bottom: 0 !important;
+    border: none !important;
+  }
+
+  ion-item-divider {
+    margin-top: 15px !important;
+    margin-bottom: -30px !important;
+    border: none !important;
+  }
+}
+
+.light-input-list:last-child {
+  margin-bottom: 10px !important;
+}
+
+.no-bg {
+  background: none !important;
+}
+
+.centered {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 9999 !important;
+}
+
+.text-muted {
+  font-weight: 300;
+  color: grey;
+}
+
+.disapear {
+  display: none;
+}
+
+.appear {
+  display: block;
+}
+
+.faslid-in {
+  animation: faslid-in 0.5s cubic-bezier(0.550, 0.055, 0.675, 0.190) both;
+}
+
+.rotate-center {
+  animation: rotate-center 0.6s ease-in-out infinite both;
+}
+
+@keyframes faslid-in {
+  0% {
+    scale: .98;
+    opacity: 0;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+.faslid-out {
+  animation: faslid-out 0.5s cubic-bezier(0.550, 0.055, 0.675, 0.190) both;
+}
+
+@keyframes faslid-out {
+  0% {
+    scale: 1.08;
+    opacity: 1;
+  }
+  30% {
+    scale: 1;
+    opacity: .8;
+  }
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+}
+
+ion-footer {
+  padding: 0 !important;
+
+  button {
+    margin: 0 auto !important;
+    border-radius: unset !important;
+    width: 100% !important;
+    height: 42px !important;
+  }
+}
+
+@keyframes rotate-center {
+  0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+  }
+
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}

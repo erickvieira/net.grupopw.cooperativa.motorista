@@ -1,0 +1,40 @@
+page-register-personal-data {
+
+  .background {
+    background-image: $loginBackground !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  .box {
+    margin: 4px auto !important;
+    width: 96% !important;
+    max-width: 450px !important;
+  }
+
+  .blur {
+    background: inherit !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    border-radius: 5px !important;
+  }
+
+  .blur::before {
+    content: "" !important;
+    background: $loginBackground !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: auto !important;
+    background-attachment: local !important;
+    position: absolute !important;
+    left: -25px !important;
+    right: -25px !important;
+    top: -25px !important;
+    bottom: -25px !important;
+    box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.2) !important;
+    filter: blur(8px) invert(12%) brightness(50%) !important;
+  }
+
+}
